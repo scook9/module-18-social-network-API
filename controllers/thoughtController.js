@@ -56,7 +56,7 @@ module.exports = {
       const deletedThought = await Thought.deleteOne({
         _id: req.params.thoughtId,
       });
-      res.json(deletedthought);
+      res.json(deletedThought);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
