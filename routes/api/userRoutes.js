@@ -8,8 +8,6 @@ const {
   deleteUser,
   addFriend,
 } = require("../../controllers/userController");
-//http://localhost:3001/api/users
-//set up logic in controllers directory, import here
 
 // http://localhost:3001/api/users
 router.route("/").get(getUsers).post(createUser);
