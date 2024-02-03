@@ -37,7 +37,45 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
   //put to update user by _id
+  async updateUser(req, res) {
+    try {
+      const updatedUser = await User.updateOne(
+        { _id: req.params.userId },
+        req.body
+      );
+      res.json(updatedUser);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
 
   //delete to remove user by _id
+  async deleteUser(req, res) {
+    try {
+      const deletedUser = await User.deleteOne({ _id: req.params.userId });
+      res.json(deletedUser);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
+
+  //post to add new friend to user's friend list
+  async addFriend(req, res) {
+    try {
+      const friend = await User.findOne({ _id: req.params.friendId });
+
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { friends: friend }
+        //instead of { friends: friend }, could also pass req.params.friendId
+      );
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
 };
